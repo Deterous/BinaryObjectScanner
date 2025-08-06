@@ -138,7 +138,8 @@ namespace BinaryObjectScanner
                         var fullProtection = fullProtectionList != null && fullProtectionList.Count > 0
                             ? string.Join(", ", [.. fullProtectionList])
                             : null;
-                        _fileProgress?.Report(new ProtectionProgress(reportableFileName, (i + 1) / (float)files.Count, fullProtection ?? string.Empty));
+                        if (!string.IsNullOrEmpty(fullProtection)
+                            _fileProgress?.Report(new ProtectionProgress(reportableFileName, (i + 1) / (float)files.Count, fullProtection));
                     }
                 }
 
@@ -171,7 +172,8 @@ namespace BinaryObjectScanner
                     var fullProtection = fullProtectionList != null && fullProtectionList.Count > 0
                         ? string.Join(", ", [.. fullProtectionList])
                         : null;
-                    _fileProgress?.Report(new ProtectionProgress(reportableFileName, 1, fullProtection ?? string.Empty));
+                    if (!string.IsNullOrEmpty(fullProtection)
+                        _fileProgress?.Report(new ProtectionProgress(reportableFileName, 1, fullProtection));
                 }
 
                 // Throw on an invalid path
